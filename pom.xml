@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>cn.com.studyshop</groupId>
+	<artifactId>artifactory-test-jar</artifactId>
+	<version>${project.release.version}</version>
+	<packaging>jar</packaging>
+
+	<name>artifactory-test-jar</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.release.version>0.0.1-SNAPSHOT</project.release.version>
+	</properties>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>fad895ebea66-snapshots</name>
+			<url>http://192.168.99.100:8082/artifactory/libs-snapshot</url>
+		</snapshotRepository>
+		<repository>
+			<id>central</id>
+			<name>fad895ebea66-releases</name>
+			<url>http://192.168.99.100:8082/artifactory/libs-release</url>
+		</repository>
+	</distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<!-- 默认为测试版本 发布版本设定 -->
+	<!-- 生产版本发布 mvn clean deploy -P product -s settings.xml -->
+	<!-- 默认测试版本 mvn clean deploy -s settings.xml -->
+
+	<profiles>
+		<profile>
+			<id>product</id>
+			<properties>
+				<project.release.version>0.1</project.release.version>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
